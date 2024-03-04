@@ -20,7 +20,7 @@ VALIDATE(){
         echo -e "$G... Success $N"
     fi # fi means reverse of if indicating condition end
 }
-if  [ $ID -ne 0 ]
+if [ $ID -ne 0 ]
     then
         echo " $R Error:: Please run this script with root access $N"
         exit 1 # you can give greater than 0
