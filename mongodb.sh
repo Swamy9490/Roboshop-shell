@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ID=$(id -u)
-
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
@@ -19,7 +18,6 @@ VALIDATE(){
     else
         echo -e "$G... Success $N"
     fi # fi means reverse of if indicating condition end
-
 }
 
 if [ $ID -ne 0 ]
