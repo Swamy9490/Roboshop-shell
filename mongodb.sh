@@ -14,9 +14,9 @@ LOGFILE="/tmp/$0-$TIMESTAMP.log"
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo -e "$R... Failed $N"
+        echo -e "$2... $R Failed $N"
     else
-        echo -e "$G... Success $N"
+        echo -e "$2... $G Success $N"
     fi # fi means reverse of if indicating condition end
 }
 
