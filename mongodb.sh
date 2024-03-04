@@ -13,13 +13,15 @@ LOGFILE="/tmp/$0-$TIMESTAMP.log"
     echo "script started executing at $TIMESTAMP" &>> $LOGFILE
 
 VALIDATE(){
-    if [ $ID -ne 0 ]
+    if [ $1 -ne 0 ]
     then
         echo -e "$R... Failed $N"
     else
         echo -e "$G... Success $N"
     fi # fi means reverse of if indicating condition end
+
 }
+
 if [ $ID -ne 0 ]
     then
         echo " $R Error:: Please run this script with root access $N"
