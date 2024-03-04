@@ -16,6 +16,7 @@ VALIDATE(){
     if [ $1 -ne 0 ]
     then
         echo -e "$2... $R Failed $N"
+        exit 1
     else   
         echo -e "$2... $G Success $N"
     fi # fi means reverse of if indicating condition end
@@ -41,11 +42,16 @@ dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Installing Nodejs:18" 
 
-useradd roboshop &>> $LOGFILE
+id roboshop # if roboshop user does not exist then it is failure
+    if [ $? -ne 0 ]
+    then
+        useradd roboshop &>> $LOGFILE
+        VALIDATE $? "roboshop user Cretion" 
+    else
+        echo "roboshop user already exist $Y Skipping $N"
+    fi
 
-VALIDATE $? "Creting roboshop user" 
-
-mkdir /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE
 
 VALIDATE $? "Creating app directory" 
 
@@ -55,7 +61,7 @@ VALIDATE $? "Downloading catalogue application"
 
 cd /app 
 
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 
 VALIDATE $? "Unzipping catalogue application" 
 
