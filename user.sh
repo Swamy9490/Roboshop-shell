@@ -61,9 +61,9 @@ VALIDATE $? "Downloading user application"
 
 cd /app 
 
-unzip -0 /tmp/user.zip &>> $LOGFILE
+unzip -o /tmp/user.zip  &>> $LOGFILE
 
-VALIDATE $? "unzipping user" 
+VALIDATE $? "unzipping user"
 
 npm install &>> $LOGFILE
 
