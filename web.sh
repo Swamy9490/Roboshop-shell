@@ -56,12 +56,12 @@ VALIDATE $? "Moving nginx html directory"
 
 unzip -0 /tmp/web.zip &>> $LOGFILE
 
-VALIDATE $? "Unzipping web"
+VALIDATE $? "unzipping web"
  
 cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 
-VALIDATE $? "Copied roboshop reverse proxy conf"
+VALIDATE $? "copied roboshop reverse proxy conf"
 
 systemctl restart nginx &>> $LOGFILE
 
-VALIDATE $? "Restarted nginx"
+VALIDATE $? "restarted nginx"
