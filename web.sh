@@ -7,10 +7,10 @@ Y="\e[33m"
 N="\e[0m"
 MONGDB_HOST=mongodb.swamydevops.cloud
 
-TIMESTAMP=$(date +F%-H%-M%-S%)
+TIMESTAMP=$(date +F%-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
-    echo "script started executing at $TIMESTAMP" &>> $LOGFILE
+echo "script started executing at $TIMESTAMP" &>> $LOGFILE
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -54,7 +54,7 @@ cd /usr/share/nginx/html &>> $LOGFILE
 
 VALIDATE $? "Moving nginx html directory"
 
-unzip -0 /tmp/web.zip &>> $LOGFILE
+unzip -o /tmp/web.zip &>> $LOGFILE
 
 VALIDATE $? "unzipping web"
  
