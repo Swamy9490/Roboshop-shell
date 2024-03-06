@@ -5,6 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+MONGDB_HOST=mongodb.swamydevops.cloud
 
 TIMESTAMP=$(date +F%-H%-M%-S%)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -19,7 +20,6 @@ VALIDATE(){
     else
         echo -e "$2... $G Success $N"
     fi # fi means reverse of if indicating condition end
-
 }
 
 if [ $ID -ne 0 ]
@@ -30,38 +30,38 @@ else
     echo "You are root user"
 fi # fi means reverse of if indicating condition end
 
-dnf install nginx -y
+dnf install nginx -y &>> $LOGFILE
 
 VALIDATE $? "Installing nginx"
 
-systemctl enable nginx
+systemctl enable nginx &>> $LOGFILE
 
 VALIDATE $? "Enable nginx"
 
-systemctl start nginx
+systemctl start nginx &>> $LOGFILE
 
 VALIDATE $? "Starting nginx"
 
-rm -rf /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/* &>> $LOGFILE
 
 VALIDATE $? "Removed default website"
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
 
 VALIDATE $? "Downloaded web application"
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html &>> $LOGFILE
 
 VALIDATE $? "Moving nginx html directory"
 
-unzip /tmp/web.zip
+unzip -0 /tmp/web.zip &>> $LOGFILE
 
 VALIDATE $? "Unzipping web"
-
-cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf 
+ 
+cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 
 VALIDATE $? "Copied roboshop reverse proxy conf"
 
-systemctl restart nginx 
+systemctl restart nginx &>> $LOGFILE
 
 VALIDATE $? "Restarted nginx"
