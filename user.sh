@@ -10,7 +10,7 @@ MONGDB_HOST=mongodb.swamydevops.cloud
 TIMESTAMP=$(date +F%-H%-M%-S%)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
-    echo "script executing at $TIMESTAMP" &>> $LOGFILE
+    echo "script started executing at $TIMESTAMP" &>> $LOGFILE
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -24,7 +24,7 @@ VALIDATE(){
 
 if [ $ID -ne 0 ]
 then
-    echo "$R Error:: Please run this script with root access $N"
+    echo -e "$R Error:: Please run this script with root access $N"
     exit 1 # you can give greater than 0
 else
     echo "You are root user"
@@ -45,10 +45,10 @@ VALIDATE $? "Installing nodejs:18"
 id roboshop # if roboshop user does not exist, then it is failure
 if [ $? -ne 0 ]
 then
-    useradd roboshop &>> $LOGFILE
+    useradd roboshop 
     VALIDATE $? "roboshop user creation"
 else 
-    echo -e "roboshop user already exist then $Y SKIPPING $N"
+    echo -e "roboshop user already exist $Y SKIPPING $N"
 fi # fi means reverse of if indicating condition end
 
 mkdir -p /app &>> $LOGFILE
@@ -85,7 +85,7 @@ systemctl start user &>> $LOGFILE
 
 VALIDATE $? "Starting user"
 
-cp /home/centos/roboshop-shell/etc/yum.repos.d/mongo.repo 
+cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo 
 
 VALIDATE $? "Copying mongodb repo"
 
