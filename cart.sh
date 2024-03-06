@@ -1,31 +1,31 @@
 #!/bin/bash
 
 ID=$(id -u)
-R="\e[33m"
+R="\e[31m"
 G="\e[32m"
-Y="\e[31m"
+Y="\e[33m"
 N="\e[0m"
 
 
 TIMESTAMP=$(date +F%-H%-M%-S%)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
-    echo "script executing at $TIMESTAMP" &>> $LOGFILE
+echo "script started executing at $TIMESTAMP" &>> $LOGFILE
 
 VALIDATE(){
-if [ $1 -ne 0 ]
-then
-    echo -e "$2... $R Failed $N"
-    exit 1
-else
-    echo -e "$2... $G Success $N"
-fi # fi means reverse of if indicating condition end
+    if [ $1 -ne 0 ]
+    then
+        echo -e "$2... $R Failed $N"
+        exit 1
+    else
+        echo -e "$2... $G Success $N"
+    fi # fi means reverse of if indicating condition end
 }
 
 if [ $ID -ne 0 ]
 then
-    echo "Error:: $R Please run this script with root access $N"
-    exit 1 #you can give greater than 0
+    echo -e "$R Error:: Please run this script with root access $N"
+    exit 1 # you can give greater than 0
 else
     echo "You are root user"
 fi # fi means reverse of if indicating condition end
@@ -69,7 +69,7 @@ npm install &>> $LOGFILE
 
 VALIDATE $? "Insatlling dependencies"
 
-cp /home/centos/roboshop-shell/etc/systemd/system/cart.service &>> $LOGFILE
+cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
 
 VALIDATE $? "Copying cart service file"
 
