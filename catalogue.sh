@@ -7,7 +7,7 @@ Y="\e[33m"
 N="\e[0m"
 MONGDB_HOST=mongodb.swamydevops.cloud
 
-TIMESTAMP=$(date +F%-H%-M%-S%)
+TIMESTAMP=$(date +F%-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
 echo "script started executing at $TIMESTAMP" &>> $LOGFILE
