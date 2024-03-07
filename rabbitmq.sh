@@ -10,7 +10,7 @@ MONGDB_HOST=mongodb.swamydevops.cloud
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
-    echo "script started executing at $TIMESTAMP" &>> $LOGFILE
+    echo "script stareted executing at $TIMESTAMP" &>> $LOGFILE
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -36,7 +36,7 @@ VALIDATE $? "Downloading erlang script"
 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>> $LOGFILE
 
-VALIDATE $? "Downloading RabbitMQ server"
+VALIDATE $? "Downloading rabbitMQ script"
 
 dnf install rabbitmq-server -y &>> $LOGFILE
 
@@ -44,15 +44,15 @@ VALIDATE $? "Installing RabbitMQ server"
 
 systemctl enable rabbitmq-server &>> $LOGFILE
 
-VALIDATE $? "Enable rabbitmq server"
+VALIDATE $? "Enabling rabbitmq server"
 
 systemctl start rabbitmq-server &>> $LOGFILE
 
-VALIDATE $? "Start rabbitmq server"
+VALIDATE $? "Starting rabbitmq server"
 
 rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
 
-VALIDATE $? "Creating user"
+VALIDATE $? "creating user"
 
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
 
