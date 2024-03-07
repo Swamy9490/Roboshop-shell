@@ -30,30 +30,30 @@ else
     echo -e "you are root user"
 fi # fi means of reverse of if indicating condition end
 
-curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>> $LOGFILE
 
 VALIDATE $? "Downloading erlang script"
 
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>> $LOGFILE
 
 VALIDATE $? "Downloading RabbitMQ server"
 
-dnf install rabbitmq-server -y 
+dnf install rabbitmq-server -y &>> $LOGFILE
 
 VALIDATE $? "Installing RabbitMQ server"
 
-systemctl enable rabbitmq-server
+systemctl enable rabbitmq-server &>> $LOGFILE
 
 VALIDATE $? "Enable rabbitmq server"
 
-systemctl start rabbitmq-server 
+systemctl start rabbitmq-server &>> $LOGFILE
 
 VALIDATE $? "Start rabbitmq server"
 
-rabbitmqctl add_user roboshop roboshop123
+rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
 
 VALIDATE $? "Creating user"
 
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
 
 VALIDATE $? "setting permissions"
