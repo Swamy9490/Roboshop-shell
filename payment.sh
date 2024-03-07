@@ -36,7 +36,7 @@ id roboshop # if roboshop user does not exixt then it is failure
 if [ $? -ne 0 ]
 then
     useradd roboshop &>> $LOGFILE
-    VALIDATE $? "roboshop user creating"
+    VALIDATE $? "roboshop user creation"
 else
     echo -e "roboshop user already exist $Y SKIPPING $N"
 fi # fi means reverse of if indicating condition end
@@ -47,13 +47,13 @@ VALIDATE $? "Created app directory"
 
 curl -L -o /tmp/payment.zip https://roboshop-builds.s3.amazonaws.com/payment.zip &>> $LOGFILE
 
-VALIDATE $? "Download payment application"
+VALIDATE $? "Downloading payment"
 
 cd /app 
 
 unzip -o /tmp/payment.zip &>> $LOGFILE
 
-VALIDATE $? "unzipping payment file"
+VALIDATE $? "unzipping payment"
 
 pip3.6 install -r requirements.txt &>> $LOGFILE
 
@@ -65,7 +65,7 @@ VALIDATE $? "Copying payment service"
 
 systemctl daemon-reload &>> $LOGFILE
 
-VALIDATE $? "Payment daemon reload"
+VALIDATE $? "daemon reload"
 
 systemctl enable payment &>> $LOGFILE
 
