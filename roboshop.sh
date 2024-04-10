@@ -13,7 +13,6 @@ do
     else
         INSTANCE_TYPE="t2.micro"
     fi
-    aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $INSTANCE_TYPE --security-group-ids sg-00a53484d582571da
 
-
+    aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $INSTANCE_TYPE --security-group-ids sg-00a53484d582571da --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]"
 done
