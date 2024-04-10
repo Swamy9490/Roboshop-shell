@@ -3,8 +3,8 @@
 AMI=ami-0f3c7d07486cad139
 SG_ID=sg-00a53484d582571da
 INSTANCES=("mongodb" "mysql" "redis" "rabbitmq" "user" "cart" "shipping" "catalogue" "payment" "dispatch" "web")
-ZONE_ID=Z031453432DS56MCN4TRE
-DOMAIN_NAME=swamydevops.cloud
+ZONE_ID=Z031453432DS56MCN4TRE # replace your zone ID
+DOMAIN_NAME="swamydevops.cloud"
 
 for i in "${INSTANCES[@]}"
 do
