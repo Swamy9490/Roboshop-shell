@@ -3,7 +3,7 @@
 AMI=ami-0f3c7d07486cad139
 SG_ID=sg-0e7301d568352c84b
 INSTANCES=("mongodb" "mysql" "redis" "rabbitmq" "user" "cart" "shipping" "catalogue" "payment" "dispatch" "web")
-ZONE_ID=Z04537739C5K5LY12PPF
+ZONE_ID=Z06751621Z774PSC7OOZZ
 DOMAIN_NAME="swamydevops.cloud"
 
 for i in "${INSTANCES[@]}"
